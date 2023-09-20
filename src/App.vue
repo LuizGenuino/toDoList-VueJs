@@ -27,13 +27,30 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar app prominent color="#fcb69f" dark src="https://picsum.photos/1920/1080?random">
+      <template v-slot:img="{ props }">
+        <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
+      </template>
 
-      <v-toolbar-title>Application</v-toolbar-title>
+      <v-app-bar-nav-icon @click="drawer = !drawer"  ></v-app-bar-nav-icon>
+
+      <v-app-bar-title>Title</v-app-bar-title>
+
+      <v-spacer></v-spacer>
+
+      <v-btn icon>
+        <v-icon>mdi-magnify</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-heart</v-icon>
+      </v-btn>
+
+      <v-btn icon>
+        <v-icon>mdi-dots-vertical</v-icon>
+      </v-btn>
     </v-app-bar>
-
-    <v-main>
+    <v-main >
       <RouterView />
     </v-main>
   </v-app>
@@ -43,14 +60,14 @@
 import { RouterView } from 'vue-router';
 
 export default {
-    data: () => ({
-        drawer: null,
-        items: [
-            { title: 'Tarefas', icon: 'mdi-view-dashboard', to: '/' },
-            { title: 'Sobre', icon: 'mdi-image', to: '/sobre' },
-        ],
-        right: null,
-    }),
-    components: { RouterView }
+  data: () => ({
+    drawer: null,
+    items: [
+      { title: 'Tarefas', icon: 'mdi-view-dashboard', to: '/' },
+      { title: 'Sobre', icon: 'mdi-image', to: '/sobre' },
+    ],
+    right: null,
+  }),
+  components: { RouterView }
 }
 </script>
