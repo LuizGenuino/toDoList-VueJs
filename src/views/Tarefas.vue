@@ -50,9 +50,13 @@ export default {
     };
   },
 
+  created(){
+    this.$store.commit('searchTask')
+  },
+
   methods: {
     handleAddTask() {
-        this.$store.commit('addTask', this.novaTarefa)
+        this.$store.dispatch('addNewTask', this.novaTarefa)
         this.novaTarefa = { title: "", subtitle: "", concluded: false }
     },
 

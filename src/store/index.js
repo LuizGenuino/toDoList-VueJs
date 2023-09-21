@@ -1,27 +1,34 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Localbase from 'localbase'
+
+let db = new Localbase('db')
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    tarefas: [
-      {
-        id: 1,
-        title: "Ir ao Mercado",
-        subtitle:
-          "Preciso comprar mais macarrão com queijo, presunto e refrigerante",
-        concluded: false,
-      },
-    ],
+    tarefas: [],
   },
+
+
   getters: {
   },
+
+
   mutations: {
+    searchTask(state){
+      db.collection('tasks').get().then(tasks => {
+        state.tarefas = tasks
+      })
+    },
+
     addTask(state, novaTarefa) {
       if (novaTarefa.title !== "" || novaTarefa.title !== " ") {
         const tarefa = { ...novaTarefa, id: state.tarefas.length + 1 };
-        state.tarefas.push(tarefa);
+        db.collection('tasks').add({
+          ...tarefa
+        })
       }
     },
 
@@ -43,6 +50,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
+    async addNewTask({commit}, task){
+      await commit('addTask', task)
+      await commit('searchTask')
+    }
   },
   modules: {
   }
