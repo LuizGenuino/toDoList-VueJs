@@ -27,13 +27,14 @@
     <v-list flat subheader two-line class="pa-3">
       <v-list-item-group multiple active-class="">
         <div v-for="(tarefa, index) in $store.state.tarefas" :key="index">
-          <Tarefa :tarefa="tarefa" />
+          <Tarefa :tarefa="tarefa"  />
         </div>
       </v-list-item-group>
     </v-list>
   </div>
 </template>
 <script>
+ /* eslint-disable */
 import Tarefa from "@/components/Tarefas/tarefa.vue";
 /* eslint-disable vue/multi-word-component-names */
 export default {
@@ -46,7 +47,6 @@ export default {
   data() {
     return {
       novaTarefa: { title: "", subtitle: "", concluded: false },
-     
     };
   },
 
@@ -55,6 +55,7 @@ export default {
         this.$store.commit('addTask', this.novaTarefa)
         this.novaTarefa = { title: "", subtitle: "", concluded: false }
     },
+
   },
 
 };

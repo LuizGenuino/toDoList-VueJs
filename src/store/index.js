@@ -25,8 +25,21 @@ export default new Vuex.Store({
       }
     },
 
-    removeTask(state, idTask) {
+    deleteTask(state, idTask) {
       state.tarefas = state.tarefas.filter(tarefa => tarefa.id !== idTask)
+    },
+
+    editTask(state, newTask){
+      if (newTask.title !== "" || newTask.title !== " ") {
+        let newArray = [...state.tarefas]
+        const tarefaIndex = newArray.findIndex(tarefa => tarefa.id === newTask.id);
+        if (tarefaIndex !== -1) {
+          // Toggle do estado da tarefa
+          console.log(tarefaIndex);
+          newArray[tarefaIndex] = newTask;
+          state.tarefas = newArray
+        }
+      }
     }
   },
   actions: {

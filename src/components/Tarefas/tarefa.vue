@@ -17,20 +17,7 @@
           <v-list-item-subtitle>{{ tarefa.subtitle }}</v-list-item-subtitle>
         </v-list-item-content>
         <v-list-item-action>
-          <v-btn icon  x-large
-          @click.stop=""
-          >
-            <v-icon color="info">mdi-pencil-circle</v-icon>
-          </v-btn>
-          
-        </v-list-item-action>
-        <v-list-item-action>
-          <v-btn icon x-large
-          @click.stop="handleRemoveTask(tarefa.id)"
-          >
-            <v-icon color="error">mdi-delete-circle</v-icon>
-          </v-btn>
-          
+        <TarefaMenu :tarefa="tarefa" />
         </v-list-item-action>
       </template>
     </v-list-item>
@@ -39,12 +26,17 @@
 </template>
 
 <script>
-/* eslint-disable vue/multi-word-component-names */
+ /* eslint-disable */
+ import TarefaMenu from './tarefaMenu.vue';
 export default {
   name: "Tarefa",
 
-  props: ["tarefa"],
-
+  components: {
+    TarefaMenu
+  },
+  props: {
+    tarefa: Object // Assumindo que 'tarefa' é um objeto
+  },
   methods: {
     
     handleRemoveTask(idTask){
