@@ -24,24 +24,19 @@
         </v-btn>
       </v-col>
     </v-row>
-    <v-list flat subheader two-line class="pa-3">
-      <v-list-item-group multiple active-class="">
-        <div v-for="(tarefa, index) in $store.state.tarefas" :key="index">
-          <Tarefa :tarefa="tarefa"  />
-        </div>
-      </v-list-item-group>
-    </v-list>
+    <ListaTarefas />
+
   </div>
 </template>
 <script>
  /* eslint-disable */
-import Tarefa from "@/components/Tarefas/tarefa.vue";
+import ListaTarefas from '@/components/Tarefas/listaTarefas.vue';
 /* eslint-disable vue/multi-word-component-names */
 export default {
   name: "Tarefas",
 
   components: {
-    Tarefa,
+    ListaTarefas,
   },
 
   data() {
