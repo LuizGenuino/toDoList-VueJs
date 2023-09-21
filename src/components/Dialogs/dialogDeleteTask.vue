@@ -36,7 +36,7 @@ export default {
   },
   methods: {
     handleDeleteTask(){
-      this.$store.commit('deleteTask', this.tarefa.id)
+      this.$store.dispatch('deleteTask', this.tarefa.id)
       this.$emit('closeDialogDelete')
     }
   }

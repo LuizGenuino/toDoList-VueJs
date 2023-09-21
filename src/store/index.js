@@ -17,7 +17,7 @@ export default new Vuex.Store({
 
 
   mutations: {
-    searchTask(state){
+    searchTask(state) {
       db.collection('tasks').get().then(tasks => {
         state.tarefas = tasks
       })
@@ -32,28 +32,28 @@ export default new Vuex.Store({
       }
     },
 
-    deleteTask(state, idTask) {
-      state.tarefas = state.tarefas.filter(tarefa => tarefa.id !== idTask)
-    },
-
-    editTask(state, newTask){
-      if (newTask.title !== "" || newTask.title !== " ") {
-        let newArray = [...state.tarefas]
-        const tarefaIndex = newArray.findIndex(tarefa => tarefa.id === newTask.id);
-        if (tarefaIndex !== -1) {
-          // Toggle do estado da tarefa
-          console.log(tarefaIndex);
-          newArray[tarefaIndex] = newTask;
-          state.tarefas = newArray
-        }
-      }
-    }
   },
   actions: {
-    async addNewTask({commit}, task){
+    async addNewTask({ commit }, task) {
       await commit('addTask', task)
       await commit('searchTask')
-    }
+    },
+
+    async editTask({ commit }, newTask) {
+      if (newTask.title !== "" || newTask.title !== " ") {
+        db.collection('tasks').doc({ id: newTask.id }).update({
+          ...newTask
+        }).then(() => {
+          commit('searchTask')
+        })
+      }
+    },
+
+    async deleteTask({ commit }, idTask) {
+      db.collection('tasks').doc({ id: idTask }).delete().then(() => {
+        commit('searchTask')
+      })
+    },
   },
   modules: {
   }

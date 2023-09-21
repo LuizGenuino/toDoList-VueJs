@@ -50,7 +50,7 @@ export default {
   },
   methods: {
     handleEditTask(){
-      this.$store.commit('editTask', this.editarTarefa)
+      this.$store.dispatch('editTask', this.editarTarefa)
       this.$emit('closeDialogEdit')
     }
   }
