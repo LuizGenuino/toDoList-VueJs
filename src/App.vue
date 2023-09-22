@@ -1,16 +1,20 @@
 <template>
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app>
-      <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title class="text-h6">
-            ToDoList
-          </v-list-item-title>
-          <v-list-item-subtitle>
-            Vue Js
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </v-list-item>
+      <v-img
+        src="https://picsum.photos/1920/1080?random"
+        gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        dark
+        class="pa-5 text-center"
+        height="170"
+      >
+        <v-list-item>
+          <v-list-item-content>
+            <v-list-item-title class="text-h6"> ToDoList </v-list-item-title>
+            <v-list-item-subtitle> Vue Js </v-list-item-subtitle>
+          </v-list-item-content>
+        </v-list-item>
+      </v-img>
 
       <v-divider></v-divider>
 
@@ -27,47 +31,47 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-app-bar app prominent color="#fcb69f" dark src="https://picsum.photos/1920/1080?random">
+    <v-app-bar
+      app
+      prominent
+      height="170"
+      color="#fcb69f"
+      dark
+      src="https://picsum.photos/1920/1080?random"
+    >
       <template v-slot:img="{ props }">
-        <v-img v-bind="props" gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"></v-img>
+        <v-img
+          v-bind="props"
+          gradient="to top right, rgba(19,84,122,.5), rgba(128,208,199,.8)"
+        ></v-img>
       </template>
 
-      <v-app-bar-nav-icon @click="drawer = !drawer"  ></v-app-bar-nav-icon>
-
-      <v-app-bar-title>Title</v-app-bar-title>
-
-      <v-spacer></v-spacer>
-
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-heart</v-icon>
-      </v-btn>
-
-      <v-btn icon>
-        <v-icon>mdi-dots-vertical</v-icon>
-      </v-btn>
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+      <center>
+        <v-app-bar-title class="mt-10" >
+          <InputTask/>
+        </v-app-bar-title>
+      </center>
     </v-app-bar>
-    <v-main >
+    <v-main>
       <RouterView />
     </v-main>
   </v-app>
 </template>
 
 <script>
-import { RouterView } from 'vue-router';
+import { RouterView } from "vue-router";
+import InputTask from './components/inputTask.vue';
 
 export default {
   data: () => ({
-    drawer: null,
+    drawer: true,
     items: [
-      { title: 'Tarefas', icon: 'mdi-view-dashboard', to: '/' },
-      { title: 'Sobre', icon: 'mdi-image', to: '/sobre' },
+      { title: "Tarefas", icon: "mdi-view-dashboard", to: "/" },
+      { title: "Sobre", icon: "mdi-image", to: "/sobre" },
     ],
     right: null,
   }),
-  components: { RouterView }
-}
+  components: { RouterView, InputTask },
+};
 </script>

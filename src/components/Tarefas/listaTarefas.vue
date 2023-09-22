@@ -1,9 +1,8 @@
 <template>
   <div>
-    <drop-list :items="Tasks" @reorder="$event.apply(Tasks)">
+    <drop-list :items="Tasks" @reorder="$event.apply(Tasks)" class="px-2 py-4">
       <template v-slot:item="{ item, reorder }">
         <drag :key="item.id" :data="item">
-          >
             <Tarefa
               style="background-color: white"
               :style="
