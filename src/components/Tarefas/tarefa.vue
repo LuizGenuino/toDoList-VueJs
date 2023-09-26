@@ -2,7 +2,7 @@
   <div>
     <v-list-item
       :class="{ 'light-blue lighten-4': tarefa.concluded }"
-      @click="tarefa.concluded = !tarefa.concluded"
+      @click="handleEditTask"
     >
       <template v-slot:default="{}">
         <v-list-item-action>
@@ -41,6 +41,12 @@ export default {
     
     handleRemoveTask(idTask){
         this.$store.commit('removeTask', idTask)
+    },
+
+    handleEditTask(){
+      let editarTarefa = {...this.tarefa, concluded: !this.tarefa.concluded}
+      this.$store.dispatch('editTask', editarTarefa)
+      this.$emit('closeDialogEdit')
     }
   }
 };
