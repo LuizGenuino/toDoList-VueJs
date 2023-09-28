@@ -1,5 +1,9 @@
 # front-end
 
+## Initial Project Basis
+```
+https://www.youtube.com/playlist?list=PLygIEirBzJi6qaDltMN44zyVHjbqUa4e-
+```
 ## Project setup
 ```
 npm install
