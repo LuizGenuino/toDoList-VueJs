@@ -1,11 +1,10 @@
-import ServiceBase from "./serviceBase";
+import ServiceBase from "./ServiceBase";
 
 export class Service extends ServiceBase {
 
-    constructor(route, id) {
+    constructor(route) {
         super()
         this.setRoute(route)
-        this.setId(id)
     }
 
     async list(config = {}) {
