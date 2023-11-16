@@ -2,7 +2,7 @@ import axios from "axios"
 import requestInterceptor from "./requestInterceptor"
 import responseInterceptor from "./responseInterceptor"
 
-const baseUrl = process.env.VUE_APP_HTTP_API_URL || 'http://localhost:4005/api/v1'
+const baseUrl = process.env.VUE_APP_HTTP_API_URL || 'http://localhost:3333/'
 
 const timeout = process.env.VUE_APP_HTTP_TIMEOUT || '60000'
 const headers = {

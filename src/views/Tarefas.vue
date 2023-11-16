@@ -1,6 +1,6 @@
 
 <template>
-  <div>
+ <MainPage>
     
     <ListaTarefas />
     <div
@@ -21,17 +21,18 @@
         </div>
       </center>
     </div>
-  </div>
+  </MainPage>
 </template>
 <script>
- /* eslint-disable */
 import ListaTarefas from '@/components/Tarefas/listaTarefas.vue';
+import MainPage from './Main.vue'
 /* eslint-disable vue/multi-word-component-names */
 export default {
   name: "Tarefas",
 
   components: {
     ListaTarefas,
+    MainPage
   },
 
   created(){
