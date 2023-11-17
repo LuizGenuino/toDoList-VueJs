@@ -11,8 +11,9 @@ const statusHttp = {
     401: async () => {
       localStorage.removeItem('ToDoList@user')
       localStorage.removeItem('ToDoList@token')
-      //await new AuthService().signOut()
-      //window.location.reload()
+      setTimeout(() => {
+        window.location.reload();
+      }, 5000);
     },
   
     default: (response) => {
