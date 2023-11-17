@@ -2,9 +2,9 @@
 <template>
  <MainPage>
     
-    <ListaTarefas />
+    <ListaTarefas v-if="taskList.length > 0"  :tasks="taskList"/>
     <div
-    v-if="!$store.state.tarefas.length"
+    v-else
     class="mt-16 animate__animated animate__bounceInUp"
     >
       <center>
@@ -26,6 +26,7 @@
 <script>
 import ListaTarefas from '@/components/Tarefas/listaTarefas.vue';
 import MainPage from './Main.vue'
+import { TaskService } from '@/integrations/services';
 /* eslint-disable vue/multi-word-component-names */
 export default {
   name: "Tarefas",
@@ -35,8 +36,29 @@ export default {
     MainPage
   },
 
+  data() {
+    return{
+      taskList: []
+    }
+  },
+  methods: {
+  
+    async getTask(){
+      try {
+        const taskService = new TaskService()
+        const response = await taskService.list()
+        console.log(response);
+        this.taskList = response.data
+      } catch (error) {
+        console.log(error);
+        this.$getAlertaGlobal().exibirAlerta("error", error.message);
+      }
+    }
+
+  },
+
   created(){
-    this.$store.commit('searchTask')
+    this.getTask()
   },
 
 };

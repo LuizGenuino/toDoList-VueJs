@@ -1,6 +1,6 @@
 <template>
   <div>
-    <drop-list :items="Tasks" @reorder="$event.apply(Tasks)" class="px-2 py-4">
+    <drop-list :items="tasks" @reorder="$event.apply(Tasks)" class="px-2 py-4">
       <template v-slot:item="{ item, reorder }">
         <drag :key="item.id" :data="item">
             <Tarefa
@@ -30,15 +30,13 @@ export default {
     DropList,
     Tarefa,
   },
+  props: {
+    tasks: Array // Assumindo que 'tarefa' é um objeto
+  },
   data: function () {
     return {};
   },
 
-  computed: {
-    Tasks() {
-      return this.$store.state.tarefas;
-    },
-  },
 };
 </script>
 
