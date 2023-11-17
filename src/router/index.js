@@ -12,6 +12,11 @@ const routes = [
     path: '/login',
     name: 'Login',
     component: () => import('../views/Login.vue'),
+    beforeEnter: (to, from, next) => {
+      // Chama a função para limpar os dados do localStorage
+      limparLocalStorage();
+      next();
+    },
   },
   {
     path: '/trocar-senha',
@@ -56,5 +61,11 @@ router.beforeEach((to, from, next) => {
     next();
   }
 });
+
+// Função para limpar os dados do localStorage
+function limparLocalStorage() {
+  localStorage.removeItem('ToDoList@token');
+  localStorage.removeItem('ToDoList@user');
+}
 
 export default router;
