@@ -1,5 +1,5 @@
 <template>
-    <v-app id="inspire">
+    <div>
       <v-navigation-drawer v-model="drawer" app>
         <v-img
           src="https://picsum.photos/1920/1080?random"
@@ -8,6 +8,11 @@
           class="pa-5 text-center"
           height="170"
         >
+        <v-avatar
+          size="80"
+        >
+          <img src="@/assets/logo.png" alt="Logo">
+        </v-avatar>
           <v-list-item>
             <v-list-item-content>
               <v-list-item-title class="text-h6"> ToDoList </v-list-item-title>
@@ -56,7 +61,7 @@
       <v-main>
         <slot></slot>
       </v-main>
-    </v-app>
+    </div>
   </template>
   
   <script>
