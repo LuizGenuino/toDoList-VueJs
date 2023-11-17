@@ -3,6 +3,7 @@
     <div class="d-flex justify-space-between align-center">
       {{ mensagem }}
       <v-btn
+      class="ml-2"
         fab
         x-small
         @click="fecharAlerta"
@@ -30,7 +31,11 @@ export default {
   methods: {
     exibirAlerta(tipo, mensagem) {
       this.alertVisible = true;
-      this.mensagem = mensagem;
+      if(mensagem.includes("oken")){
+        this.mensagem = "Sessão expirada. Por favor, faça login novamente."
+      }else{
+        this.mensagem = mensagem;
+      }
 
       switch (tipo) {
         case "error":
