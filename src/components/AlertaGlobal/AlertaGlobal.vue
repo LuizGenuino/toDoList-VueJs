@@ -1,14 +1,18 @@
 <template>
-  <v-snackbar
-    :color="alertColor"
-    :timeout="timeout"
-    :value="alertVisible"
-    top
-    right
-    multi-line
-  >
-    {{ mensagem }}
-    <v-btn @click="fecharAlerta" text> Fechar </v-btn>
+  <v-snackbar :color="alertColor" :timeout="timeout" :value="alertVisible" top right multi-line >
+    <div class="d-flex justify-space-between align-center">
+      {{ mensagem }}
+      <v-btn
+        fab
+        x-small
+        @click="fecharAlerta"
+        :color="alertColor"
+      >
+        <v-icon>
+          mdi-close
+        </v-icon>
+      </v-btn>
+    </div>
   </v-snackbar>
 </template>
 
@@ -20,7 +24,7 @@ export default {
       alertVisible: false,
       alertColor: "",
       mensagem: "",
-      timeout: 10000, // Tempo em milissegundos (10 segundos)
+      timeout: 6000, // Tempo em milissegundos (10 segundos)
     };
   },
   methods: {
@@ -29,14 +33,17 @@ export default {
       this.mensagem = mensagem;
 
       switch (tipo) {
-        case "erro":
+        case "error":
           this.alertColor = "error";
           break;
-        case "sucesso":
+        case "success":
           this.alertColor = "success";
           break;
-        case "aviso":
+        case "warning":
           this.alertColor = "warning";
+          break;
+          case "info":
+          this.alertColor = "info";
           break;
         default:
           this.alertColor = "info";
@@ -47,56 +54,9 @@ export default {
       }, this.timeout);
     },
 
-    error(mensagem) {
-      this.alertVisible = true;
-
-      this.mensagem = mensagem;
-
-      this.alertColor = "error";
-
-      setTimeout(() => {
-        this.fecharAlerta();
-      }, this.timeout);
-    },
-
-    success(mensagem) {
-      this.alertVisible = true;
-
-      this.mensagem = mensagem;
-
-      this.alertColor = "success";
-
-      setTimeout(() => {
-        this.fecharAlerta();
-      }, this.timeout);
-    },
-
-    warning(mensagem) {
-      this.alertVisible = true;
-
-      this.mensagem = mensagem;
-
-      this.alertColor = "warning";
-
-      setTimeout(() => {
-        this.fecharAlerta();
-      }, this.timeout);
-    },
-
-    info(mensagem) {
-      this.alertVisible = true;
-
-      this.mensagem = mensagem;
-
-      this.alertColor = "info";
-
-      setTimeout(() => {
-        this.fecharAlerta();
-      }, this.timeout);
-    },
-
     fecharAlerta() {
       this.alertVisible = false;
+
     },
   },
 };

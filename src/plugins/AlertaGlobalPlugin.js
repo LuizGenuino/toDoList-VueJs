@@ -1,7 +1,8 @@
 // AlertaGlobalPlugin.js
 
 import Vue from 'vue';
-import AlertaGlobal from '@/components/AlertaGlobal/AlertaGlobal.vue';
+import AlertaGlobal from '@/components/AlertaGlobal/AlertaGlobal.vue'
+import { setAlertaGlobal } from '@/config/globalConfig.js';
 
 let instanciaAlertaGlobal;
 
@@ -14,6 +15,7 @@ function getInstanciaAlertaGlobal() {
   if (!instanciaAlertaGlobal) {
     instanciaAlertaGlobal = criarInstanciaAlertaGlobal();
     document.body.appendChild(instanciaAlertaGlobal.$el);
+    setAlertaGlobal(instanciaAlertaGlobal);
   }
   return instanciaAlertaGlobal;
 }
@@ -24,7 +26,11 @@ function mostrarAlerta(tipo, mensagem) {
 }
 
 const AlertaGlobalPlugin = {
-  install() {
+  install(Vue) {
+    // Registra o componente globalmente
+    Vue.component('AlertaGlobal', AlertaGlobal);
+
+    // Adiciona o método $alertaGlobal ao protótipo do Vue
     Vue.prototype.$alertaGlobal = mostrarAlerta;
   },
 };
