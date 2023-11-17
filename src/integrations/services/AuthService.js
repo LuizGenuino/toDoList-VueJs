@@ -1,4 +1,4 @@
-import { Service } from "./base/Service";
+import { Service } from "./base/service";
 
 class AuthService extends Service{
 

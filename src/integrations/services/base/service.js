@@ -1,4 +1,4 @@
-import ServiceBase from "./ServiceBase";
+import ServiceBase from "./serviceBase";
 
 export class Service extends ServiceBase {
 
