@@ -3,7 +3,7 @@
 export default  {
   config(config) {
     const getToken = localStorage.getItem('ToDoList@token')
-      config.headers["Authorization"] = `Bearer ${getToken}`;
+      config.headers["Authorization"] = `${getToken}`;
         return config;
   },
 
