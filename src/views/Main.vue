@@ -73,6 +73,7 @@
       drawer: true,
       items: [
         { title: "Tarefas", icon: "mdi-view-dashboard", to: "/tarefas" },
+        { title: "Categorias", icon: "mdi-shape-plus", to: "/categorias" },
         { title: "Sobre", icon: "mdi-image", to: "/sobre" },
       ],
       right: null,

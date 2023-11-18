@@ -30,6 +30,12 @@ const routes = [
     meta: { requiresAuth: true } // Adiciona meta informando que essa rota requer autenticação
   },
   {
+    path: '/categorias',
+    name: 'Categorias',
+    component: () => import('../views/Categorias.vue'),
+    meta: { requiresAuth: true } // Adiciona meta informando que essa rota requer autenticação
+  },
+  {
     path: '/sobre',
     name: 'Sobre',
     component: () => import('../views/Sobre.vue'),
