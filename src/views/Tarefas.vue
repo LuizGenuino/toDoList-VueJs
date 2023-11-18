@@ -47,10 +47,8 @@ export default {
       try {
         const taskService = new TaskService()
         const response = await taskService.list()
-        console.log(response);
         this.taskList = response.data
       } catch (error) {
-        console.log(error);
         this.$getAlertaGlobal().exibirAlerta("error", error.message);
       }
     }
