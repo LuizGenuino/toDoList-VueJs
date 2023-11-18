@@ -10,14 +10,31 @@
         </v-list-item-action>
 
         <v-list-item-content>
-          <v-list-item-title
-            :class="{ 'text-decoration-line-through': tarefa.concluded }"
-            >{{ tarefa.title }}</v-list-item-title
-          >
-          <v-list-item-subtitle>{{ tarefa.subtitle }}</v-list-item-subtitle>
+          <v-col cols="12" md="6" sm="8" xl="9">
+            <v-list-item-title
+              :class="{ 'text-decoration-line-through': tarefa.concluded }"
+              >{{ tarefa.title }}</v-list-item-title
+            >
+            <v-list-item-subtitle>{{ tarefa.subtitle }}</v-list-item-subtitle>
+          </v-col>
+          <v-col cols="12" md="6" sm="4"  xl="3">
+            <v-row>
+              <v-col cols="6" sm="12" md="6">
+              <v-chip :color="preference.color" class=" white--text text-caption">{{ preference.name }}</v-chip>
+            </v-col>
+            <v-col  cols="6"  sm="12" md="6"  v-if="tarefa.categories.length > 0">
+              <v-row>
+                <div v-for="(item, index) in tarefa.categories" :key="index" class="ma-1  text-center">
+                  <v-icon color="primary">{{item.icon}}</v-icon>
+                  <p class="primary--text font-weight-black text-caption" >{{ item.name }}</p>
+                </div>    
+              </v-row>   
+            </v-col>
+            </v-row>
+          </v-col>
         </v-list-item-content>
         <v-list-item-action>
-        <TarefaMenu :tarefa="tarefa" />
+          <TarefaMenu :tarefa="tarefa" />
         </v-list-item-action>
       </template>
     </v-list-item>
@@ -26,28 +43,41 @@
 </template>
 
 <script>
- /* eslint-disable */
- import TarefaMenu from './tarefaMenu.vue';
+/* eslint-disable */
+import TarefaMenu from "./tarefaMenu.vue";
 export default {
   name: "Tarefa",
 
   components: {
-    TarefaMenu
+    TarefaMenu,
   },
   props: {
-    tarefa: Object // Assumindo que 'tarefa' é um objeto
+    tarefa: Object, // Assumindo que 'tarefa' é um objeto
+  },
+  computed: {
+    preference() {
+      if(this.tarefa.preference === 1){
+        return {color: "error", name: "Urgente"}
+      }
+      if(this.tarefa.preference === 2){
+        return {color: "warning", name: "Importante"}
+      }else{
+        return {color: "info", name: "Normal"}
+      }
+
+      
+    },
   },
   methods: {
-    
-    handleRemoveTask(idTask){
-        this.$store.commit('removeTask', idTask)
+    handleRemoveTask(idTask) {
+      this.$store.commit("removeTask", idTask);
     },
 
-    handleEditTask(){
-      let editarTarefa = {...this.tarefa, concluded: !this.tarefa.concluded}
-      this.$store.dispatch('editTask', editarTarefa)
-      this.$emit('closeDialogEdit')
-    }
-  }
+    handleEditTask() {
+      let editarTarefa = { ...this.tarefa, concluded: !this.tarefa.concluded };
+      this.$store.dispatch("editTask", editarTarefa);
+      this.$emit("closeDialogEdit");
+    },
+  },
 };
 </script>

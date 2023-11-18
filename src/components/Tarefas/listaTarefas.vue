@@ -1,6 +1,6 @@
 <template>
   <div>
-    <drop-list :items="tasks" @reorder="$event.apply(Tasks)" class="px-2 py-4">
+    <drop-list :items="tasks" @reorder="$event.apply(Tasks)" class="px-1 py-4">
       <template v-slot:item="{ item, reorder }">
         <drag :key="item.id" :data="item">
             <Tarefa
