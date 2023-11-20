@@ -14,7 +14,7 @@ const routes = [
     component: () => import('../views/Login.vue'),
     beforeEnter: (to, from, next) => {
       // Chama a função para limpar os dados do localStorage
-      limparLocalStorage();
+      loginPersistence();
       next();
     },
   },
@@ -55,8 +55,10 @@ router.beforeEach((to, from, next) => {
 
   if (to.matched.some(record => record.meta.requiresAuth)) {
     // Esta rota requer autenticação
-    if (!token) {
+    if (!token ) {
       // Se não houver token, redirecione para a página de login
+      localStorage.removeItem('ToDoList@token');
+      localStorage.removeItem('ToDoList@user');
       next({ path: '/login' });
     } else {
       // Se houver token, permita o acesso à rota
@@ -68,10 +70,15 @@ router.beforeEach((to, from, next) => {
   }
 });
 
-// Função para limpar os dados do localStorage
-function limparLocalStorage() {
-  localStorage.removeItem('ToDoList@token');
-  localStorage.removeItem('ToDoList@user');
+function loginPersistence() {
+  const token = localStorage.getItem('ToDoList@token');
+  if (token) {
+    router.push('/tarefas');
+  } else {
+    // Se não houver token, limpe os dados do localStorage
+    localStorage.removeItem('ToDoList@token');
+    localStorage.removeItem('ToDoList@user');
+  }
 }
 
 export default router;
