@@ -19,8 +19,8 @@
         </v-list-item>
       </v-list>
     </v-menu>
-    <DialogEditTask v-if="items[0].dialog" @closeDialogEdit="toggleDialog(0)" :tarefa="tarefa"/>
-    <DialogDeleteTask  v-if="items[1].dialog" @closeDialogDelete="toggleDialog(1)" :tarefa="tarefa" />
+    <DialogEditTask v-if="items[0].dialog" @closeDialogEdit="toggleDialog(0)" :tarefa="tarefa"  @getTask="$emit('getTask')"/>
+    <DialogDeleteTask  v-if="items[1].dialog" @closeDialogDelete="toggleDialog(1)" :tarefa="tarefa"   @getTask="$emit('getTask')"/>
   </div>
 </template>
 <script>

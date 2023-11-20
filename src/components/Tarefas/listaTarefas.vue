@@ -3,15 +3,16 @@
     <drop-list :items="tasks" @reorder="$event.apply(Tasks)" class="px-1 py-4">
       <template v-slot:item="{ item, reorder }">
         <drag :key="item.id" :data="item">
-            <Tarefa
-              style="background-color: white"
-              :style="
-                reorder
-                  ? { borderLeft: '2px solid #1976D2', marginLeft: '-2px' }
-                  : {}
-              "
-              :tarefa="item"
-            />
+          <Tarefa
+            @getTask="$emit('getTask')"
+            style="background-color: white"
+            :style="
+              reorder
+                ? { borderLeft: '2px solid #1976D2', marginLeft: '-2px' }
+                : {}
+            "
+            :tarefa="item"
+          />
           <v-divider />
         </drag>
       </template>
@@ -31,12 +32,11 @@ export default {
     Tarefa,
   },
   props: {
-    tasks: Array // Assumindo que 'tarefa' é um objeto
+    tasks: Array, // Assumindo que 'tarefa' é um objeto
   },
   data: function () {
     return {};
   },
-
 };
 </script>
 
