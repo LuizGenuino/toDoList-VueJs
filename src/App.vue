@@ -1,6 +1,7 @@
 <template>
   <v-app id="inspire">
     <AlertaGlobal ref="alertaGlobal" />
+    <loadingGlobal ref="loadingGlobal" />
     <RouterView />
   </v-app>
 </template>
@@ -8,14 +9,18 @@
 <script>
 import AlertaGlobal from "@/components/AlertaGlobal/AlertaGlobal.vue";
 import { setAlertaGlobal } from "@/config/globalConfig";
+import { setLoadingGlobal } from "@/config/globalConfig";
+import LoadingGlobal from './components/LoadingGlobal/LoadingGlobal.vue';
 
 export default {
   components: {
     AlertaGlobal,
+    LoadingGlobal,
   },
   mounted() {
     // Configura o AlertaGlobal nas variáveis globais ao montar o componente
     setAlertaGlobal(this.$refs.alertaGlobal);
+    setLoadingGlobal(this.$refs.loadingGlobal)
   },
 };
 </script>
