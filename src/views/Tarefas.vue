@@ -2,7 +2,7 @@
 <template>
  <MainPage>
     
-    <ListaTarefas v-if="taskList.length > 0"  :tasks="taskList"/>
+    <ListaTarefas v-if="taskList.length > 0"  :tasks="taskList" @getTask="getTask()"/>
     <div
     v-else
     class="mt-16 animate__animated animate__bounceInUp"
@@ -38,18 +38,29 @@ export default {
 
   data() {
     return{
-      taskList: []
+
+      tasks: []
     }
   },
+
+  computed:{
+    taskList(){
+      return [...this.tasks]
+    }
+  },
+
   methods: {
   
     async getTask(){
       try {
+        this.$getLoadingGlobal().loading(true, "Caregando Tarefas...");
         const taskService = new TaskService()
         const response = await taskService.list()
-        this.taskList = response.data
+        this.tasks = response.data
       } catch (error) {
         this.$getAlertaGlobal().exibirAlerta("error", error.message);
+      }finally{
+        this.$getLoadingGlobal().loading(false);
       }
     }
 

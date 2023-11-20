@@ -56,6 +56,7 @@ export default {
     async login() {
       if(this.email.length > 4 && this.password.length > 4){
         try {
+        this.$getLoadingGlobal().loading(true);
         const authService = new AuthService();
         const { data } = await authService.insert({
           email: this.email,
@@ -65,6 +66,7 @@ export default {
         localStorage.setItem("ToDoList@user", JSON.stringify(data.user));
         this.$router.push("/tarefas");
       } catch (err) {
+        this.$getLoadingGlobal().loading(false);
         this.$getAlertaGlobal().exibirAlerta("error", err.message);
       }
       }else{
