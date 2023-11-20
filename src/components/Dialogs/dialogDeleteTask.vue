@@ -21,6 +21,7 @@
   </div>
 </template>
 <script>
+import { TaskService } from '@/integrations/services';
 export default {
   name: "DialogDeleteTask",
   props: {
@@ -31,13 +32,28 @@ export default {
       dialog: true,
     };
   },
-  created(){
-    this.editarTarefa = {...this.tarefa}
-  },
+
   methods: {
-    handleDeleteTask(){
-      this.$store.dispatch('deleteTask', this.tarefa.id)
-      this.$emit('closeDialogDelete')
+    async handleDeleteTask(){
+      try {
+        console.log(this.tarefa.id);
+        this.$getLoadingGlobal().loading(true, "Excluindo Tarefa...");
+        const taskService = new TaskService()
+        taskService.setId(this.tarefa.id)
+        await taskService.delete()
+        this.$emit('getTask')
+        this.$emit('closeDialogDelete')
+        this.$getAlertaGlobal().exibirAlerta("success", 'Tarefa Excluida com Sucesso!');
+      } catch (error) {
+        this.$getLoadingGlobal().loading(false);
+        this.$getAlertaGlobal().exibirAlerta(
+          "error",
+          `${error.message}`
+        );
+      } finally {
+        this.$getLoadingGlobal().loading(false);
+        this.$emit("closeDialogEdit");
+      }
     }
   }
 };
