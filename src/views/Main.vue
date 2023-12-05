@@ -65,7 +65,7 @@
   </template>
   
   <script>
-  import InputTask from '../components/inputTask.vue';
+  import InputTask from '../components/InputTask/inputTask.vue';
   
   export default {
     name: "MainPage",
