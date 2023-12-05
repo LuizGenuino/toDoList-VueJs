@@ -36,7 +36,6 @@ export default {
   methods: {
     async handleDeleteTask(){
       try {
-        console.log(this.tarefa.id);
         this.$getLoadingGlobal().loading(true, "Excluindo Tarefa...");
         const taskService = new TaskService()
         taskService.setId(this.tarefa.id)

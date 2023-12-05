@@ -34,7 +34,6 @@
             <MultipleSelect
               :itensExist="editarTarefa.categories"
               @addCategories="addCategories"
-              :func="addCategories"
             />
           </v-col>
         </v-row>
@@ -109,7 +108,6 @@ export default {
         );
       } catch (error) {
         this.$getLoadingGlobal().loading(false);
-        this.$emit("closeDialogEdit");
         this.$getAlertaGlobal().exibirAlerta("error", `${error.message}`);
       } finally {
         this.listPreference();
