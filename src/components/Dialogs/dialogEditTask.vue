@@ -21,7 +21,6 @@
           </v-col>
           <v-col cols="12" md="12" sm="12">
             <v-select
-            multiple
               v-model="editarTarefa.preference"
               :items="preference"
               label="Prioridade"
@@ -30,6 +29,13 @@
               dense
             >
             </v-select>
+          </v-col>
+          <v-col cols="12" md="12" sm="12">
+            <MultipleSelect
+              :itensExist="editarTarefa.categories"
+              @addCategories="addCategories"
+              :func="addCategories"
+            />
           </v-col>
         </v-row>
         <v-card-actions>
@@ -45,7 +51,9 @@
 </template>
 <script>
 import { TaskService } from "@/integrations/services";
+import MultipleSelect from "../MultipleSelect/MultipleSelect.vue";
 export default {
+  components: { MultipleSelect },
   name: "DialogEditTask",
   props: {
     tarefa: Object, // Assumindo que 'tarefa' é um objeto
@@ -58,10 +66,26 @@ export default {
     };
   },
   created() {
-    const preference = { 1: "Urgente", 2: "Importante", 3: "Normal" };
-    this.editarTarefa = { ...this.tarefa, preference: preference[this.tarefa.preference] };
+    this.listPreference();
   },
+
   methods: {
+    listPreference() {
+      const preference = { 1: "Urgente", 2: "Importante", 3: "Normal" };
+      this.editarTarefa = {
+        ...this.tarefa,
+        preference: preference[this.tarefa.preference],
+      };
+    },
+
+    addCategories(categrieList) {
+      const categories = [];
+      categrieList.forEach((element) => {
+        categories.push(element.id);
+      });
+      this.editarTarefa = { ...this.editarTarefa, categories: categories };
+    },
+
     async handleEditTask() {
       try {
         this.$getLoadingGlobal().loading(true, "Alterando Tarefa...");
@@ -75,6 +99,7 @@ export default {
           preference: this.editarTarefa.preference,
           title: this.editarTarefa.title,
           subtitle: this.editarTarefa.subtitle,
+          categories: this.editarTarefa.categories,
         });
 
         this.$emit("getTask");
@@ -87,6 +112,7 @@ export default {
         this.$emit("closeDialogEdit");
         this.$getAlertaGlobal().exibirAlerta("error", `${error.message}`);
       } finally {
+        this.listPreference();
         this.$getLoadingGlobal().loading(false);
         this.$emit("closeDialogEdit");
       }
