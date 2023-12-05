@@ -1,13 +1,17 @@
 import db from "@/services/localbase"
 
 export default {
+    async getTask({ commit }) {
+        await commit('getTask')
+    },
+
     async addNewTask({ commit }, task) {
         await commit('addTask', task)
         await commit('searchTask')
     },
 
     async editTask({ commit }, newTask) {
-        if (newTask.title !== "" && newTask.title !== " " &&  newTask.title) {
+        if (newTask.title !== "" && newTask.title !== " " && newTask.title) {
             db.collection('tasks').doc({ id: newTask.id }).update({
                 ...newTask
             }).then(() => {

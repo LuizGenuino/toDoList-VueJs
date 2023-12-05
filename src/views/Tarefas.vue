@@ -26,7 +26,6 @@
 <script>
 import ListaTarefas from '@/components/Tarefas/listaTarefas.vue';
 import MainPage from './Main.vue'
-import { TaskService } from '@/integrations/services';
 /* eslint-disable vue/multi-word-component-names */
 export default {
   name: "Tarefas",
@@ -45,7 +44,7 @@ export default {
 
   computed:{
     taskList(){
-      return [...this.tasks]
+      return [...this.$store.state.tarefas]
     }
   },
 
@@ -54,16 +53,13 @@ export default {
     async getTask(){
       try {
         this.$getLoadingGlobal().loading(true, "Caregando Tarefas...");
-        const taskService = new TaskService()
-        const response = await taskService.list()
-        this.tasks = response.data
+        await this.$store.dispatch('getTask');
       } catch (error) {
         this.$getAlertaGlobal().exibirAlerta("error", error.message);
       }finally{
         this.$getLoadingGlobal().loading(false);
       }
     }
-
   },
 
   created(){
