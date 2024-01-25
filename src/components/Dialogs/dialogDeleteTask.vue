@@ -2,7 +2,7 @@
   <div>
     <v-dialog v-model="dialog" persistent max-width="350">
       <v-card>
-        <v-card-title class="text-h5"> Editar Tarefa </v-card-title>
+        <v-card-title class="text-h5"> Excluir Tarefa </v-card-title>
         <v-divider></v-divider>
         <v-card-text class="mt-3">
           Tem certeza que deseja excluir está Tarefa? A ação não pode ser desfeitas!

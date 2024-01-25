@@ -57,14 +57,17 @@
             <InputTask/>
           </v-app-bar-title>
         </center>
+        <avatar class="avatar"/>
       </v-app-bar>
       <v-main>
         <slot></slot>
       </v-main>
+      
     </div>
   </template>
   
   <script>
+import Avatar from '@/components/Avatar/avatar.vue';
   import InputTask from '../components/InputTask/inputTask.vue';
   
   export default {
@@ -78,6 +81,14 @@
       ],
       right: null,
     }),
-    components: { InputTask },
+    components: { InputTask, Avatar },
   };
   </script>
+  <style scoped>
+  .avatar{
+    position: absolute;
+    left: 40%;
+    top: 10%;
+  }
+
+  </style>

@@ -50,7 +50,7 @@
 </template>
 <script>
 import { TaskService } from "@/integrations/services";
-import MultipleSelect from "../MultipleSelect/MultipleSelect.vue";
+import MultipleSelect from "../IconSelect/MultipleSelect.vue";
 export default {
   components: { MultipleSelect },
   name: "DialogEditTask",

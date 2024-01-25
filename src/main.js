@@ -10,6 +10,8 @@ import LoadingGlobalPlugin from './plugins/LoadingGlobalPlugin.js';
 import { setAlertaGlobal } from '@/config/globalConfig';
 import { setLoadingGlobal } from '@/config/globalConfig';
 
+import VueMask from 'v-mask'
+
 
 Vue.config.productionTip = false;
 
@@ -18,6 +20,8 @@ Vue.use(AlertaGlobalPlugin);
 
 // Use o plugin do LoadinGlobal
 Vue.use(LoadingGlobalPlugin);
+
+Vue.use(VueMask);
 
 
 new Vue({

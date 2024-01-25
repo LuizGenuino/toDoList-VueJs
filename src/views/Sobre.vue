@@ -1,7 +1,7 @@
 
 <template>
     <MainPage>
-       <h1>Sobre</h1>
+       <h1 class="text-center">Sobre</h1>
      </MainPage>
    </template>
    <script>

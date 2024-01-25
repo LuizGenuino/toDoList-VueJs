@@ -19,6 +19,11 @@ const routes = [
     },
   },
   {
+    path: '/criar-usuario',
+    name: 'CriarUsuario',
+    component: () => import('../views/CriarUsuario.vue'),
+  },
+  {
     path: '/trocar-senha',
     name: 'ForgotPassword',
     component: () => import('../views/ForgotPassword.vue')
@@ -33,6 +38,12 @@ const routes = [
     path: '/categorias',
     name: 'Categorias',
     component: () => import('../views/Categorias.vue'),
+    meta: { requiresAuth: true } // Adiciona meta informando que essa rota requer autenticação
+  },
+  {
+    path: '/perfil',
+    name: 'Perfil',
+    component: () => import('../views/Perfil.vue'),
     meta: { requiresAuth: true } // Adiciona meta informando que essa rota requer autenticação
   },
   {

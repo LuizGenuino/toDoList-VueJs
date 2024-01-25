@@ -49,7 +49,7 @@
 </template>
 <script>
 import { TaskService } from "@/integrations/services";
-import MultipleSelect from "../MultipleSelect/MultipleSelect.vue";
+import MultipleSelect from "../IconSelect/MultipleSelect.vue";
 export default {
   components: { MultipleSelect },
   name: "DialogCreateTask",
@@ -90,7 +90,10 @@ export default {
     async handleCreateTask() {
       try {
         this.$getLoadingGlobal().loading(true, "Criando Tarefa...");
-
+        if(this.novaTarefa.title ==="" || this.novaTarefa.title ===" " || this.novaTarefa.categories.length <= 0 || !this.novaTarefa.preference ){
+          this.$getAlertaGlobal().exibirAlerta("error", "Deve conter Titulo, Prioridade e Categoria!");
+          return
+        }
         const preference = { Urgente: 1, Importante: 2, Normal: 3 };
         this.novaTarefa.preference = preference[this.novaTarefa.preference];
 

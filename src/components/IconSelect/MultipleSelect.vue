@@ -23,7 +23,7 @@
         <v-list-item>
           <v-list-item-content>
             <v-list-item-title class="text-center">
-              <v-icon class="text-center" color="primary">{{
+              <v-icon  class="text-center" color="primary" >{{
                 item.icon
               }}</v-icon>
             </v-list-item-title>
@@ -47,7 +47,7 @@ export default {
       type: Array,
       required: false,
       default: () => [],
-    }
+    },
   },
   data() {
     return {
@@ -71,7 +71,7 @@ export default {
       } else {
         this.selectedItems.splice(index, 1);
       }
-      this.$emit("addCategories", this.selectedItems)
+      this.$emit("addCategories", this.selectedItems);
     },
 
     async getCategories() {
@@ -94,7 +94,7 @@ export default {
     this.getCategories();
     if (this.itensExist.length > 0) {
       this.selectedItems = [...this.itensExist];
-      this.$emit("addCategories", this.selectedItems)
+      this.$emit("addCategories", this.selectedItems);
     }
   },
 };
